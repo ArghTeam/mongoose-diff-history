@@ -20,12 +20,12 @@ const saveDiffObject = (currentObject, original, updated, opts, metaData) => {
         JSON.parse(JSON.stringify(updated))
     );
 
-    if (opts.omit) {
-        omit(diff, opts.omit);
-    }
-
-    if (!diff || !Object.keys(diff).length) return;
-
+    if (opts.omit) omit(diff, opts.omit);
+    
+    if (!diff) return;
+    const keys = Object.keys(diff);
+    if (!keys.length || keys.includes('$inc')) return;
+ 
     const collectionId = currentObject._id;
     const collectionName = currentObject.constructor.modelName;
 
