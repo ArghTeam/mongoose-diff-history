@@ -24,7 +24,7 @@ const saveDiffObject = (currentObject, original, updated, opts, metaData) => {
     
     if (!diff) return;
     const keys = Object.keys(diff);
-    if (!keys.length || keys.includes('$inc')) return;
+    if (!keys.length || keys.filter(k => k.startsWith('$')).length) return
  
     const collectionId = currentObject._id;
     const collectionName = currentObject.constructor.modelName;
