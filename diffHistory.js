@@ -13,6 +13,7 @@ const isValidCb = cb => {
 };
 
 const saveDiffObject = (currentObject, original, updated, opts, metaData) => {
+    if (!original) return; // Do not create history if original was null
     const { __user: user, __reason: reason } = metaData || currentObject;
 
     const diff = diffPatcher.diff(
